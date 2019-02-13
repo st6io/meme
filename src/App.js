@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react';
-import { Heading, Flex, Box, Button } from 'rebass';
 import styled from 'styled-components/macro';
+import { Heading, Card, Flex, Box, Button } from 'rebass';
+import { ThemeProvider } from 'styled-components';
+import { FaMoon, FaSun, FaUpload, FaRandom } from 'react-icons/fa';
+
 import { saveSvgAsPng } from 'save-svg-as-png';
 
-import { Input, GlobalStyle, Meme } from './components';
+import { GlobalStyle, Meme, Input, Logo, themes } from './components';
 import { getRandomMeme } from './memes';
 
 const onLabelChange = setter => ({ currentTarget: { value } }) => setter(value);
 
-const onFileInputChange = setter => ({
+const onFileMemeInputChange = setter => ({
   currentTarget: {
     files: [file],
   },
@@ -20,11 +23,52 @@ const onFileInputChange = setter => ({
   }
 };
 
+// layout
+const Layout = styled(Box)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.bg};
+  overflow-y: auto;
+`;
+
+// cards
+const MemeCard = props => (
+  <Card
+    {...props}
+    my={3}
+    py={3}
+    border={1}
+    borderRadius={3}
+    width={600}
+    variant="primary"
+  />
+);
+
+// headings
+const MemeTitle = props => <Heading {...props} as="h1" fontSize={3} ml={3} />;
+
+const MemeParagraph = props => (
+  <Heading {...props} as="p" fontSize={1} my={3} />
+);
+
+// buttons
+const MemeButton = props => (
+  <Button {...props} border={1} borderRadius={3} variant="primary" />
+);
+
+// inputs
+const MemeInput = props => <Input {...props} variant="primary" />;
+
 const MemeContainer = styled(Box)`
   position: relative;
 `;
 
 const App = () => {
+  const [theme, setTheme] = useState('light');
   const [topLabel, setTopLabel] = useState('One does not simply...');
   const [bottomLabel, setBottomLabel] = useState('One does not simply...');
   const [imageSrc, setImageSrc] = useState(getRandomMeme());
@@ -33,36 +77,73 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Heading>ST6 Meme Generator</Heading>
-      <Heading as="h3">Do the most meaningful meme of your life</Heading>
-      <Flex mx={2}>
-        <MemeContainer px={2}>
-          <Meme {...{ imageSrc, topLabel, bottomLabel, ref }} />
-        </MemeContainer>
-        <Box width={1 / 2} px={2}>
-          <Flex flexDirection="column">
-            <Flex>
-              <Button onClick={() => setImageSrc(getRandomMeme(imageSrc))}>
-                Random meme
-              </Button>
-              <Input type="file" onChange={onFileInputChange(setImageSrc)} />
-            </Flex>
-            <Input
-              placeholder="Top"
-              value={topLabel}
-              onChange={onLabelChange(setTopLabel)}
-            />
-            <Input
-              placeholder="Bottom"
-              value={bottomLabel}
-              onChange={onLabelChange(setBottomLabel)}
-            />
+
+      <ThemeProvider theme={themes[theme]}>
+        <Layout>
+          <Flex justifyContent="center">
+            <MemeCard>
+              <Flex alignItems="center" px={3}>
+                <Logo />
+                <MemeTitle>Meme Generator</MemeTitle>
+                <Box mx="auto" />
+                <MemeInput
+                  id="file-upload"
+                  type="file"
+                  onChange={onFileMemeInputChange(setImageSrc)}
+                />
+                <MemeButton as="label" for="file-upload">
+                  <FaUpload />
+                </MemeButton>
+                <MemeButton
+                  onClick={() => setImageSrc(getRandomMeme(imageSrc))}
+                  ml={3}
+                >
+                  <FaRandom />
+                </MemeButton>
+              </Flex>
+
+              <Flex px={3}>
+                <MemeParagraph>
+                  Do the most meaningful meme of your life
+                </MemeParagraph>
+              </Flex>
+
+              <Flex flexDirection="column" px={3}>
+                <MemeInput
+                  placeholder="Top text"
+                  value={topLabel}
+                  onChange={onLabelChange(setTopLabel)}
+                />
+                <MemeInput
+                  placeholder="Bottom text"
+                  value={bottomLabel}
+                  onChange={onLabelChange(setBottomLabel)}
+                />
+              </Flex>
+
+              <MemeContainer>
+                <Meme {...{ imageSrc, topLabel, bottomLabel, ref }} />
+              </MemeContainer>
+
+              <Flex alignItems="center" px={3} pt={3}>
+                <MemeButton
+                  onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                >
+                  {theme === 'light' ? <FaMoon /> : <FaSun />}
+                </MemeButton>
+
+                <Box mx="auto" />
+
+                <MemeButton
+                  onClick={() => saveSvgAsPng(ref.current, 'meme.png')}
+                >
+                  Download
+                </MemeButton>
+              </Flex>
+            </MemeCard>
           </Flex>
-          <Button onClick={() => saveSvgAsPng(ref.current, 'meme.png')}>
-            Download
-          </Button>
-        </Box>
-      </Flex>
+        </Layout>
+      </ThemeProvider>
     </>
   );
 };
