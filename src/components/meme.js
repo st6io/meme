@@ -5,12 +5,14 @@ import { Text } from 'rebass';
 
 const MemeText = styled(Text)`
   position: absolute;
+  width: 100%;
   bottom: ${props => (props.verticalAlign === 'bottom' ? 0 : undefined)};
   color: white;
   font-size: xx-large;
   font-weight: 700;
   font-family: impact;
   white-space: pre-wrap;
+  text-align: center;
   text-transform: uppercase;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
@@ -44,10 +46,8 @@ const Meme = ({ imageSrc, topLabel, bottomLabel, maxWidth, forwardedRef }) => {
           height="100%"
           style={{ position: 'absolute' }}
         >
-          <MemeText p={2} verticalAlign="top">
-            {topLabel}
-          </MemeText>
-          <MemeText p={2} verticalAlign="bottom">
+          <MemeText p={3}>{topLabel}</MemeText>
+          <MemeText p={3} verticalAlign="bottom">
             {bottomLabel}
           </MemeText>
         </foreignObject>
