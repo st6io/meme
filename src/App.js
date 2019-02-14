@@ -43,17 +43,13 @@ const MemeCard = props => (
     py={3}
     border={1}
     borderRadius={3}
-    width={600}
+    width={602}
     variant="primary"
   />
 );
 
 // headings
 const MemeTitle = props => <Heading {...props} as="h1" fontSize={3} ml={3} />;
-
-const MemeParagraph = props => (
-  <Heading {...props} as="p" fontSize={1} my={3} />
-);
 
 // buttons
 const MemeButton = props => (
@@ -65,12 +61,15 @@ const MemeInput = props => <Input {...props} variant="primary" />;
 
 const MemeContainer = styled(Box)`
   position: relative;
+  text-align: center;
 `;
 
 const App = () => {
   const [theme, setTheme] = useState('light');
-  const [topLabel, setTopLabel] = useState('One does not simply...');
-  const [bottomLabel, setBottomLabel] = useState('One does not simply...');
+  const [topLabel, setTopLabel] = useState(
+    'Do the most meaningful meme of your life...',
+  );
+  const [bottomLabel, setBottomLabel] = useState('We are hiring...');
   const [imageSrc, setImageSrc] = useState(getRandomMeme());
   const ref = useRef(null);
 
@@ -102,13 +101,7 @@ const App = () => {
                 </MemeButton>
               </Flex>
 
-              <Flex px={3}>
-                <MemeParagraph>
-                  Do the most meaningful meme of your life
-                </MemeParagraph>
-              </Flex>
-
-              <Flex flexDirection="column" px={3}>
+              <Flex flexDirection="column" px={3} pt={3}>
                 <MemeInput
                   placeholder="Top text"
                   value={topLabel}
