@@ -1,6 +1,6 @@
 const themes = {
   light: {
-    bg: '#fff',
+    bg: '#f9fafc',
     color: '#3c4858',
     cards: {
       primary: {
@@ -24,7 +24,7 @@ const themes = {
     },
   },
   dark: {
-    bg: '#fff',
+    bg: '#8492a6',
     color: '#8492a6',
     cards: {
       primary: {
