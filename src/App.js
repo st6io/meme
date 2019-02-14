@@ -11,7 +11,7 @@ import { getRandomMeme } from './memes';
 
 const onLabelChange = setter => ({ currentTarget: { value } }) => setter(value);
 
-const onFileMemeInputChange = setter => ({
+const onFileInputChange = setter => ({
   currentTarget: {
     files: [file],
   },
@@ -23,7 +23,6 @@ const onFileMemeInputChange = setter => ({
   }
 };
 
-// layout
 const Layout = styled(Box)`
   position: fixed;
   top: 0;
@@ -35,7 +34,6 @@ const Layout = styled(Box)`
   overflow-y: auto;
 `;
 
-// cards
 const MemeCard = props => (
   <Card
     {...props}
@@ -48,15 +46,12 @@ const MemeCard = props => (
   />
 );
 
-// headings
 const MemeTitle = props => <Heading {...props} as="h1" fontSize={3} ml={3} />;
 
-// buttons
 const MemeButton = props => (
   <Button {...props} border={1} borderRadius={3} variant="primary" />
 );
 
-// inputs
 const MemeInput = props => <Input {...props} variant="primary" />;
 
 const MemeContainer = styled(Box)`
@@ -88,7 +83,7 @@ const App = () => {
                 <MemeInput
                   id="file-upload"
                   type="file"
-                  onChange={onFileMemeInputChange(setImageSrc)}
+                  onChange={onFileInputChange(setImageSrc)}
                 />
                 <MemeButton as="label" for="file-upload">
                   <FaUpload />
