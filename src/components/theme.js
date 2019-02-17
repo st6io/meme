@@ -14,6 +14,11 @@ const theme = {
         backgroundColor: '#ffa60b',
         borderColor: '#ffa60b',
       },
+      outline: {
+        color: '#3c4858',
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+      },
     },
     inputs: {
       primary: {
@@ -37,6 +42,11 @@ const theme = {
         color: '#fff',
         backgroundColor: '#ffa60b',
         borderColor: '#ffa60b',
+      },
+      outline: {
+        color: '#ffa60b',
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
       },
     },
     inputs: {

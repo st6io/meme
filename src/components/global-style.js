@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components/macro';
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Oswald:700');
+
   html,
   body,
   #root {
@@ -15,11 +17,6 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
   }
 
   input[type='file'] {
