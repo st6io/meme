@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components/macro';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Oswald:700');
-
   html,
   body,
   #root {

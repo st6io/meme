@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import { Text } from 'rebass';
 
+import 'typeface-oswald';
+
 const MemeText = styled(Text)`
   position: absolute;
   width: 100%;
   bottom: ${props => (props.verticalAlign === 'bottom' ? 0 : undefined)};
   color: white;
-  font-size: xx-large;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Impact', 'Oswald', sans-serif;
   font-size: xx-large;
   white-space: pre-wrap;
   text-align: center;
@@ -27,10 +28,11 @@ const MemeAttributionText = styled(Text)`
   bottom: 0;
   right: 0;
   color: #333;
-  font-size: small;
   font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
   background: rgba(255, 255, 255, 0.7);
-  padding: 2px;
+  padding: 1px 2px;
 `;
 
 const Meme = ({ imageSrc, topLabel, bottomLabel, maxWidth, forwardedRef }) => {
