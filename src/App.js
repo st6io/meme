@@ -101,7 +101,7 @@ const App = () => {
                   <Logo />
                 </MemeLink>
                 <MemeTitle>Meme Generator</MemeTitle>
-                <MemeLink href="https://st6.io/" target="_blank">
+                <MemeLink href="https://st6.io/careers/" target="_blank">
                   <MemeTooltip>We&apos;re hiring</MemeTooltip>
                 </MemeLink>
 
