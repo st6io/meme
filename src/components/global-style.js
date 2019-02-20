@@ -15,6 +15,9 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: ${props => props.theme.color};
+    background: ${props => props.theme.bg};
+    overflow: auto;
   }
 
   input[type='file'] {

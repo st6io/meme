@@ -3,12 +3,15 @@ import 'styled-components/macro';
 import styled from 'styled-components/macro';
 import { Heading, Card, Flex, Box, Button, Link } from 'rebass';
 import { ThemeProvider } from 'styled-components';
-import { FaMoon, FaSun, FaUpload, FaRandom } from 'react-icons/fa';
+import { FaMoon, FaSun, FaUpload, FaRandom, FaGithub } from 'react-icons/fa';
 
 import { saveSvgAsPng } from 'save-svg-as-png';
 
 import { GlobalStyle, Meme, Input, Logo, themes } from './components';
 import { getRandomMeme } from './memes';
+
+const websiteUrl = 'https://st6.io/';
+const githubUrl = 'https://github.com/st6io/meme';
 
 const onLabelChange = setter => ({ currentTarget: { value } }) => setter(value);
 
@@ -23,13 +26,6 @@ const onFileInputChange = setter => ({
     reader.readAsDataURL(file);
   }
 };
-
-const Layout = styled(Box)`
-  color: ${props => props.theme.color};
-  background: ${props => props.theme.bg};
-  height: 100%;
-  overflow-y: auto;
-`;
 
 const MemeTooltip = styled(Box)`
   position: relative;
@@ -57,7 +53,6 @@ const MemeCard = props => (
   <Card
     {...props}
     my={3}
-    py={3}
     border={1}
     borderRadius={3}
     width={602}
@@ -72,14 +67,29 @@ const MemeLink = props => (
 );
 
 const MemeButton = props => (
-  <Button {...props} border={1} borderRadius={3} variant="primary" />
+  <Button
+    {...props}
+    border={1}
+    borderRadius={3}
+    css={{
+      cursor: 'pointer',
+    }}
+  />
 );
-
-const MemeOutlineButton = props => (
-  <Button {...props} border={1} borderRadius={3} variant="outline" />
-);
+MemeButton.defaultProps = {
+  variant: 'primary',
+};
 
 const MemeInput = props => <Input {...props} variant="primary" />;
+
+const MemeContainer = props => (
+  <Flex
+    {...props}
+    css={{
+      position: 'relative',
+    }}
+  />
+);
 
 const App = () => {
   const [theme, setTheme] = useState('light');
@@ -89,76 +99,81 @@ const App = () => {
   const ref = useRef(null);
 
   return (
-    <>
-      <GlobalStyle />
-
-      <ThemeProvider theme={themes[theme]}>
-        <Layout>
-          <Flex justifyContent="center">
-            <MemeCard>
-              <Flex alignItems="center" px={3}>
-                <MemeLink href="https://st6.io/" target="_blank">
-                  <Logo />
-                </MemeLink>
-                <MemeTitle>Meme Generator</MemeTitle>
-                <MemeLink href="https://st6.io/careers/" target="_blank">
-                  <MemeTooltip>We&apos;re hiring</MemeTooltip>
-                </MemeLink>
-
-                <Box mx="auto" />
-                <MemeOutlineButton
-                  onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                >
-                  {theme === 'light' ? <FaMoon /> : <FaSun />}
-                </MemeOutlineButton>
-              </Flex>
-
-              <Flex flexDirection="column" px={3} pt={3}>
-                <MemeInput
-                  placeholder="Top text"
-                  value={topLabel}
-                  onChange={onLabelChange(setTopLabel)}
-                />
-                <MemeInput
-                  placeholder="Bottom text"
-                  value={bottomLabel}
-                  onChange={onLabelChange(setBottomLabel)}
-                />
-              </Flex>
-
-              <Flex alignItems="center" px={3} pb={3}>
-                <MemeInput
-                  id="file-upload"
-                  type="file"
-                  onChange={onFileInputChange(setImageSrc)}
-                />
-                <MemeButton as="label" for="file-upload" title="Upload image">
-                  <FaUpload />
-                </MemeButton>
-                <MemeButton
-                  onClick={() => setImageSrc(getRandomMeme(imageSrc))}
-                  ml={3}
-                  title="Random image"
-                >
-                  <FaRandom />
-                </MemeButton>
-                <Box mx="auto" />
-                <MemeButton
-                  onClick={() => saveSvgAsPng(ref.current, 'meme.png')}
-                  title="Download image"
-                >
-                  Download
-                </MemeButton>
-              </Flex>
-
-              <Flex justifyContent="center">
-                <Meme {...{ imageSrc, topLabel, bottomLabel, ref }} />
-              </Flex>
-            </MemeCard>
+    <ThemeProvider theme={themes[theme]}>
+      <>
+        <GlobalStyle />
+        <MemeCard mx="auto">
+          <Flex alignItems="center" px={3} pt={3}>
+            <MemeLink href={websiteUrl} target="_blank">
+              <Logo />
+            </MemeLink>
+            <MemeTitle>Meme Generator</MemeTitle>
+            <MemeLink href={`${websiteUrl}careers/`} target="_blank">
+              <MemeTooltip>We&apos;re hiring</MemeTooltip>
+            </MemeLink>
+            <Box mx="auto" />
+            <MemeButton
+              variant="outline"
+              title="Change theme"
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            >
+              {theme === 'light' ? <FaMoon /> : <FaSun />}
+            </MemeButton>
+            <MemeButton
+              as={MemeLink}
+              href={githubUrl}
+              target="_blank"
+              variant="outline"
+              title="View source code"
+            >
+              <FaGithub />
+            </MemeButton>
           </Flex>
-        </Layout>
-      </ThemeProvider>
-    </>
+
+          <Flex flexDirection="column" px={3} pt={3}>
+            <MemeInput
+              placeholder="Top text"
+              value={topLabel}
+              onChange={onLabelChange(setTopLabel)}
+            />
+            <MemeInput
+              placeholder="Bottom text"
+              value={bottomLabel}
+              onChange={onLabelChange(setBottomLabel)}
+            />
+          </Flex>
+
+          <Flex alignItems="center" px={3} pb={3}>
+            <MemeInput
+              id="file-upload"
+              type="file"
+              onChange={onFileInputChange(setImageSrc)}
+            />
+            <MemeButton as="label" for="file-upload" title="Upload image">
+              <FaUpload />
+            </MemeButton>
+            <MemeButton
+              onClick={() => setImageSrc(getRandomMeme(imageSrc))}
+              ml={3}
+              title="Random image"
+            >
+              <FaRandom />
+            </MemeButton>
+            <Box mx="auto" />
+            <MemeButton
+              onClick={() => saveSvgAsPng(ref.current, 'meme.png')}
+              title="Download image"
+            >
+              Download
+            </MemeButton>
+          </Flex>
+
+          <MemeContainer justifyContent="center">
+            <Meme {...{ imageSrc, topLabel, bottomLabel, ref }} />
+          </MemeContainer>
+        </MemeCard>
+      </>
+    </ThemeProvider>
   );
 };
 
