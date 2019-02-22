@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Heading, Card, Flex, Box, Button } from 'rebass';
-import { ThemeProvider } from 'styled-components/macro';
+import styled, { ThemeProvider } from 'styled-components/macro';
 import { FaUpload, FaRandom, FaGithub } from 'react-icons/fa';
 import { saveSvgAsPng } from 'save-svg-as-png';
+import { useMedia } from 'use-media';
 
 import { GlobalStyle, Meme, Input, Badge, Logo, themes } from './components';
 import { getRandomMeme } from './memes';
@@ -22,7 +23,12 @@ const onFileInputChange = setter => ({
   }
 };
 
+const MemeContainer = styled(Flex)`
+  position: relative;
+`;
+
 const App = () => {
+  const isMobile = useMedia({ maxWidth: 567 });
   const [theme, setTheme] = useState('light');
   const [topLabel, setTopLabel] = useState('Do the most meaningful meme...');
   const [bottomLabel, setBottomLabel] = useState('...of your life');
@@ -34,7 +40,7 @@ const App = () => {
       <>
         <GlobalStyle />
 
-        <Card variant="primary" width={602} mx="auto" my={3} pt={3}>
+        <Card variant="primary" width={[352, 602]} mx="auto" my={3} pt={3}>
           <Flex alignItems="center" px={3}>
             <Button
               variant="link"
@@ -43,7 +49,7 @@ const App = () => {
               <Logo />
             </Button>
 
-            <Heading mx={2} mb={1}>
+            <Heading mx={2} mb={1} fontSize={[2, 4]}>
               Meme Generator
             </Heading>
 
@@ -120,9 +126,12 @@ const App = () => {
             </Button>
           </Flex>
 
-          <Flex justifyContent="center">
-            <Meme {...{ imageSrc, topLabel, bottomLabel, ref }} />
-          </Flex>
+          <MemeContainer justifyContent="center">
+            <Meme
+              maxWidth={isMobile ? 350 : 600}
+              {...{ imageSrc, topLabel, bottomLabel, ref }}
+            />
+          </MemeContainer>
         </Card>
       </>
     </ThemeProvider>

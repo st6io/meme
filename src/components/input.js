@@ -7,12 +7,19 @@ import { themed } from '../utils/themed';
 const inputs = variant({ key: 'inputs' });
 
 const Input = styled(Text)(
+  {},
   borders,
   borderColor,
   borderRadius,
   inputs,
   themed('Input'),
 );
+
+Input.propTypes = {
+  ...borders.propTypes,
+  ...borderColor.propTypes,
+  ...borderRadius.propTypes,
+};
 
 Input.defaultProps = {
   as: 'input',

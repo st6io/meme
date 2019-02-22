@@ -7,12 +7,19 @@ import { themed } from '../utils/themed';
 const badges = variant({ key: 'badges' });
 
 const Badge = styled(Text)(
+  {},
   borders,
   borderColor,
   borderRadius,
   badges,
   themed('Badge'),
 );
+
+Badge.propTypes = {
+  ...borders.propTypes,
+  ...borderColor.propTypes,
+  ...borderRadius.propTypes,
+};
 
 Badge.defaultProps = {
   border: '1px solid',
