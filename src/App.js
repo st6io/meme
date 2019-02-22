@@ -6,9 +6,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 
 import { GlobalStyle, Meme, Input, Badge, Logo, themes } from './components';
 import { getRandomMeme } from './memes';
-
-const websiteUrl = 'https://st6.io/';
-const githubUrl = 'https://github.com/st6io/meme';
+import { websiteUrl, githubUrl } from './utils/links';
 
 const onLabelChange = setter => ({ currentTarget: { value } }) => setter(value);
 
