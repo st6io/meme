@@ -1,12 +1,6 @@
 import { createGlobalStyle } from 'styled-components/macro';
 
 const GlobalStyle = createGlobalStyle`
-  html,
-  body,
-  #root {
-    height: 100%;
-  }
-
   body {
     margin: 0;
     padding: 0;
@@ -15,8 +9,8 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: ${props => props.theme.color};
-    background: ${props => props.theme.bg};
+    color: ${props => props.theme.colors.text};
+    background: ${props => props.theme.colors.bg};
     overflow: auto;
   }
 

@@ -1,59 +1,98 @@
 const theme = {
   light: {
-    bg: '#f9fafc',
-    color: '#3c4858',
+    colors: {
+      bg: '#f9fafc',
+      text: '#3c4858',
+    },
     cards: {
       primary: {
-        backgroundColor: '#fff',
+        border: '1px solid',
+        borderRadius: 3,
         borderColor: '#e5e9f2',
+        backgroundColor: '#fff',
       },
     },
     buttons: {
       primary: {
-        color: '#3c4858',
+        color: 'inherit',
         backgroundColor: '#ffa60b',
-        borderColor: '#ffa60b',
+        cursor: 'pointer',
       },
       outline: {
-        color: '#3c4858',
+        color: 'inherit',
+        border: '1px solid',
+        borderColor: '#e5e9f2',
+        backgroundColor: '#eff2f7',
+        cursor: 'pointer',
+      },
+      link: {
+        padding: 0,
+        color: 'inherit',
         backgroundColor: 'transparent',
-        borderColor: 'transparent',
+        cursor: 'pointer',
       },
     },
     inputs: {
       primary: {
         color: '#3c4858',
-        backgroundColor: '#eff2f7',
         borderColor: '#e5e9f2',
+        backgroundColor: '#eff2f7',
+      },
+    },
+    badges: {
+      primary: {
+        color: '#fff',
+        borderColor: '#ff7849',
+        backgroundColor: '#ff7849',
       },
     },
   },
   dark: {
-    bg: '#8492a6',
-    color: '#8492a6',
+    colors: {
+      bg: '#8492a6',
+      text: '#8492a6',
+      orange: '#ff7849',
+    },
     cards: {
       primary: {
-        backgroundColor: '#1f2d3d',
+        border: '1px solid',
         borderColor: '#3c4858',
+        borderRadius: 3,
+        backgroundColor: '#1f2d3d',
       },
     },
     buttons: {
       primary: {
         color: '#fff',
         backgroundColor: '#ffa60b',
-        borderColor: '#ffa60b',
+        cursor: 'pointer',
       },
       outline: {
-        color: '#ffa60b',
+        color: '#fff',
+        border: '1px solid',
+        borderColor: '#3c4858',
+        backgroundColor: '#273444',
+        cursor: 'pointer',
+      },
+      link: {
+        padding: 0,
+        color: 'inherit',
         backgroundColor: 'transparent',
-        borderColor: 'transparent',
+        cursor: 'pointer',
       },
     },
     inputs: {
       primary: {
         color: '#fff',
-        backgroundColor: '#273444',
         borderColor: '#3c4858',
+        backgroundColor: '#273444',
+      },
+    },
+    badges: {
+      primary: {
+        color: '#fff',
+        borderColor: '#ff7849',
+        backgroundColor: '#ff7849',
       },
     },
   },
