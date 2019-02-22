@@ -11,8 +11,9 @@ const MemeText = styled(Text)`
   width: 100%;
   bottom: ${props => (props.verticalAlign === 'bottom' ? 0 : undefined)};
   color: white;
-  font-family: 'Impact', 'Oswald', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: xx-large;
+  font-weight: 700;
   white-space: pre-wrap;
   text-align: center;
   text-transform: uppercase;

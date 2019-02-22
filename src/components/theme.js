@@ -51,7 +51,6 @@ const theme = {
     colors: {
       bg: '#8492a6',
       text: '#8492a6',
-      orange: '#ff7849',
     },
     cards: {
       primary: {
