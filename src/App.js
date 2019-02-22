@@ -27,7 +27,7 @@ const onFileInputChange = setter => ({
 const App = () => {
   const [theme, setTheme] = useState('light');
   const [topLabel, setTopLabel] = useState('Do the most meaningful meme...');
-  const [bottomLabel, setBottomLabel] = useState('Of your life...');
+  const [bottomLabel, setBottomLabel] = useState('...of your life');
   const [imageSrc, setImageSrc] = useState(getRandomMeme());
   const ref = useRef(null);
 
