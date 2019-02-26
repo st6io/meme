@@ -4,32 +4,29 @@ import { variant, borders, borderColor, borderRadius } from 'styled-system';
 
 import { themed } from '../utils/themed';
 
-const inputs = variant({ key: 'inputs' });
+const badges = variant({ key: 'badges' });
 
-const Input = styled(Text)(
+const Badge = styled(Text)(
   {},
   borders,
   borderColor,
   borderRadius,
-  inputs,
-  themed('Input'),
+  badges,
+  themed('Badge'),
 );
 
-Input.propTypes = {
+Badge.propTypes = {
   ...borders.propTypes,
   ...borderColor.propTypes,
   ...borderRadius.propTypes,
 };
 
-Input.defaultProps = {
-  as: 'input',
+Badge.defaultProps = {
   border: '1px solid',
   borderRadius: 3,
-  fontSize: 1,
-  mx: 0,
-  mb: 3,
-  px: 3,
-  py: 2,
+  fontSize: 0,
+  px: 2,
+  py: 1,
 };
 
-export default Input;
+export default Badge;
