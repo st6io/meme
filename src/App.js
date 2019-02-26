@@ -28,7 +28,7 @@ const MemeContainer = styled(Flex)`
 `;
 
 const App = () => {
-  const isMobile = useMedia({ maxWidth: 567 });
+  const isMobile = useMedia({ maxWidth: '40em' });
   const [theme, setTheme] = useState('light');
   const [topLabel, setTopLabel] = useState('Do the most meaningful meme...');
   const [bottomLabel, setBottomLabel] = useState('...of your life');
@@ -49,21 +49,9 @@ const App = () => {
               <Logo />
             </Button>
 
-            <Heading mx={2} mb={1} fontSize={[2, 4]}>
+            <Heading mx={2} mb={1} fontSize={[1, 4]}>
               Meme Generator
             </Heading>
-
-            <Box mx="auto" />
-
-            <Button
-              mr={3}
-              variant="link"
-              as="a"
-              href={`${websiteUrl}careers/`}
-              target="_blank"
-            >
-              <Badge variant="primary">We&apos;re hiring</Badge>
-            </Button>
 
             <Button
               variant="link"
@@ -73,6 +61,17 @@ const App = () => {
               title="View source code"
             >
               <FaGithub />
+            </Button>
+
+            <Box mx="auto" />
+
+            <Button
+              variant="link"
+              as="a"
+              href={`${websiteUrl}careers/`}
+              target="_blank"
+            >
+              <Badge variant="primary">We&apos;re hiring</Badge>
             </Button>
           </Flex>
 

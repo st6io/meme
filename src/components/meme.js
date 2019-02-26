@@ -51,7 +51,7 @@ const Meme = ({ imageSrc, topLabel, bottomLabel, maxWidth, forwardedRef }) => {
       setDimensions({ width, height });
     };
     image.src = imageSrc;
-  }, [imageSrc]);
+  }, [imageSrc, maxWidth]);
 
   return (
     <svg {...dimensions} ref={forwardedRef}>
