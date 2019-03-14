@@ -12,7 +12,7 @@ const MemeText = styled(Text)`
   width: 100%;
   bottom: ${props => (props.verticalAlign === 'bottom' ? 0 : undefined)};
   color: white;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Impact', 'Oswald', sans-serif;
   font-weight: 700;
   white-space: pre-wrap;
   text-align: center;
@@ -38,10 +38,13 @@ const MemeAttributionText = styled(Text)`
   text-decoration: none;
 `;
 
-const Meme = ({ imageSrc, topLabel, bottomLabel, maxWidth, forwardedRef }) => {
+const Meme = ({ imageSrc, topLabel, bottomLabel, isMobile, forwardedRef }) => {
   const [dimensions, setDimensions] = useState({});
+
   useEffect(() => {
     const image = new Image();
+    const maxWidth = isMobile ? 350 : 600;
+
     image.onload = () => {
       let { width, height } = image;
       if (image.width > maxWidth) {
@@ -51,7 +54,14 @@ const Meme = ({ imageSrc, topLabel, bottomLabel, maxWidth, forwardedRef }) => {
       setDimensions({ width, height });
     };
     image.src = imageSrc;
-  }, [imageSrc, maxWidth]);
+  }, [imageSrc, isMobile]);
+
+  const fontSize = isMobile ? 2 : 5;
+  const p = isMobile ? 2 : 4;
+  const textProps = {
+    fontSize,
+    p,
+  };
 
   return (
     <svg {...dimensions} ref={forwardedRef}>
@@ -62,10 +72,9 @@ const Meme = ({ imageSrc, topLabel, bottomLabel, maxWidth, forwardedRef }) => {
           height="100%"
           style={{ position: 'absolute' }}
         >
-          <MemeText p={[2, 4]} fontSize={[2, 5]}>
-            {topLabel}
-          </MemeText>
-          <MemeText p={[2, 4]} fontSize={[2, 5]} verticalAlign="bottom">
+          <MemeText {...textProps}>{topLabel}</MemeText>
+
+          <MemeText verticalAlign="bottom" {...textProps}>
             {bottomLabel}
           </MemeText>
 
@@ -82,7 +91,7 @@ Meme.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   topLabel: PropTypes.string,
   bottomLabel: PropTypes.string,
-  maxWidth: PropTypes.number,
+  isMobile: PropTypes.bool,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
@@ -90,7 +99,7 @@ Meme.propTypes = {
 };
 
 Meme.defaultProps = {
-  maxWidth: 600,
+  isMobile: false,
 };
 
 const MemeWithRef = forwardRef((props, ref) => (
