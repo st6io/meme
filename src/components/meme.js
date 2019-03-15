@@ -56,11 +56,9 @@ const Meme = ({ imageSrc, topLabel, bottomLabel, isMobile, forwardedRef }) => {
     image.src = imageSrc;
   }, [imageSrc, isMobile]);
 
-  const fontSize = isMobile ? 2 : 5;
-  const p = isMobile ? 2 : 4;
   const textProps = {
-    fontSize,
-    p,
+    fontSize: isMobile ? 2 : 5,
+    p: isMobile ? 2 : 4,
   };
 
   return (
