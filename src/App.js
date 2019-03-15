@@ -9,10 +9,10 @@ import { GlobalStyle, Meme, Input, Badge, Logo, themes } from './components';
 import { getRandomMeme } from './memes';
 import { websiteUrl, githubUrl } from './utils/links';
 
-const onLabelChange = setter => ({ currentTarget: { value } }) => setter(value);
+const onLabelChange = setter => ({ target: { value } }) => setter(value);
 
 const onFileInputChange = setter => ({
-  currentTarget: {
+  target: {
     files: [file],
   },
 }) => {

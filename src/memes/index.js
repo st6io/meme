@@ -1,5 +1,4 @@
-const req = require.context('./', false, /.*\.jpg$/);
-const memes = req.keys().map(key => req(key));
+import memes from './memes';
 
 export const getRandomMeme = currentMeme => {
   let randomMeme;
