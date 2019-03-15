@@ -127,7 +127,7 @@ const App = () => {
 
           <MemeContainer justifyContent="center">
             <Meme
-              maxWidth={isMobile ? 350 : 600}
+              isMobile={isMobile}
               {...{ imageSrc, topLabel, bottomLabel, ref }}
             />
           </MemeContainer>
