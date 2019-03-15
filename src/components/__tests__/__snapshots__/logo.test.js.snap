@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Logo /> should match snapshot 1`] = `
+<Logo>
+  <ReactComponent
+    width={70}
+  >
+    <svg
+      width={70}
+    >
+      logo.svg
+    </svg>
+  </ReactComponent>
+</Logo>
+`;
