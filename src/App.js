@@ -126,10 +126,7 @@ const App = () => {
           </Flex>
 
           <MemeContainer justifyContent="center">
-            <Meme
-              isMobile={isMobile}
-              {...{ imageSrc, topLabel, bottomLabel, ref }}
-            />
+            <Meme {...{ imageSrc, topLabel, bottomLabel, isMobile, ref }} />
           </MemeContainer>
         </Card>
       </>

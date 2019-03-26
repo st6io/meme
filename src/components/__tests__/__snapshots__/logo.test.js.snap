@@ -2,7 +2,7 @@
 
 exports[`<Logo /> should match snapshot 1`] = `
 <Logo>
-  <ReactComponent
+  <ForwardRef
     width={70}
   >
     <svg
@@ -10,6 +10,6 @@ exports[`<Logo /> should match snapshot 1`] = `
     >
       logo.svg
     </svg>
-  </ReactComponent>
+  </ForwardRef>
 </Logo>
 `;
