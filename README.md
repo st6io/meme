@@ -7,6 +7,9 @@ Do the most meaningful meme of your life. https://st6.io/meme
 [![Craft][craft-badge]][craft]
 [![Careers][careers-badge]][careers]
 
+This project illustrates how ST6 crafts software. You can read more about the project setup,
+used tools and ST6 philosophy in the [accompanying blog post](https://st6.io/blog/crafting-the-st6-meme-generator/).
+
 [badge]: https://flat.badgen.net/travis/st6io/meme/master
 [travis]: https://travis-ci.org/st6io/meme
 [coverage-badge]: https://flat.badgen.net/codecov/c/github/st6io/meme
@@ -16,4 +19,4 @@ Do the most meaningful meme of your life. https://st6.io/meme
 [careers-badge]: https://flat.badgen.net/badge/we%20are/hiring/orange
 [careers]: https://st6.io/careers
 
-*This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).*
+_The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)._
