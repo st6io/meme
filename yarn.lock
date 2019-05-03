@@ -9154,10 +9154,9 @@ sass-loader@7.1.0:
     pify "^3.0.0"
     semver "^5.5.0"
 
-save-svg-as-png@1.4.8:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/save-svg-as-png/-/save-svg-as-png-1.4.8.tgz#94f71b40998f830a20ceb388b4d1e64424a74022"
-  integrity sha512-rOqjhO0tLi8C0R1SsADvP0u3vn9dze12K7H7EfoGOgs75LNMbBdcQGIcAxVy4jRkZGi6SHhZhcMRODjNS7ZHSw==
+save-svg-as-png@st6io/saveSvgAsPng#meme-fixes:
+  version "1.4.12"
+  resolved "https://codeload.github.com/st6io/saveSvgAsPng/tar.gz/dffc06c2dbbdf2a94058eef331db5956057c7c3f"
 
 sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
