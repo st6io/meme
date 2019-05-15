@@ -38,7 +38,14 @@ const MemeAttributionText = styled(Text)`
   text-decoration: none;
 `;
 
-const Meme = ({ imageSrc, topLabel, bottomLabel, isMobile, forwardedRef }) => {
+const Meme = ({
+  imageSrc,
+  topLabel,
+  bottomLabel,
+  isMobile,
+  onLoad,
+  forwardedRef,
+}) => {
   const [dimensions, setDimensions] = useState({});
 
   useEffect(() => {
@@ -52,9 +59,10 @@ const Meme = ({ imageSrc, topLabel, bottomLabel, isMobile, forwardedRef }) => {
         width = maxWidth;
       }
       setDimensions({ width, height });
+      onLoad();
     };
     image.src = imageSrc;
-  }, [imageSrc, isMobile]);
+  }, [imageSrc, isMobile, onLoad]);
 
   const textProps = {
     fontSize: isMobile ? 2 : 5,
@@ -90,6 +98,7 @@ Meme.propTypes = {
   topLabel: PropTypes.string,
   bottomLabel: PropTypes.string,
   isMobile: PropTypes.bool,
+  onLoad: PropTypes.func,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
@@ -98,6 +107,7 @@ Meme.propTypes = {
 
 Meme.defaultProps = {
   isMobile: false,
+  onLoad: () => null,
 };
 
 const MemeWithRef = forwardRef((props, ref) => (

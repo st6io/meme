@@ -4,7 +4,9 @@
   "private": true,
   "homepage": "https://st6.io/meme",
   "dependencies": {
+    "is-image-url": "1.1.8",
     "react": "16.8.6",
+    "react-addons-css-transition-group": "15.6.2",
     "react-dom": "16.8.6",
     "react-icons": "3.5.0",
     "react-scripts": "3.0.0",
