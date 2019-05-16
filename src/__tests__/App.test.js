@@ -1,11 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { Button } from 'rebass';
 import { ThemeProvider } from 'styled-components';
 import { saveSvgAsPng } from 'save-svg-as-png';
 
-import { Input, Meme, Logo, themes } from '../components';
+import { Input, Meme, Logo, themes, ImageUrlInput } from '../components';
 import { getRandomMeme } from '../memes';
 import App from '../App';
 
@@ -26,7 +26,10 @@ window.matchMedia = jest.fn().mockImplementation(query => ({
 }));
 
 describe('<App />', () => {
-  afterEach(() => window.matchMedia.mockClear());
+  afterEach(() => {
+    window.matchMedia.mockClear();
+    getRandomMeme.mockClear();
+  });
 
   it('should set meme top and bottom labels on inputs change', () => {
     const component = mount(<App />);
@@ -120,5 +123,67 @@ describe('<App />', () => {
 
     const meme = component.find(Meme);
     expect(meme).toHaveProp('isMobile', true);
+  });
+
+  it('should show image url input when image url button is clicked and hide on load', () => {
+    const component = shallow(<App />);
+
+    const button = component.find(Button).filter({ title: 'Image From URL' });
+    button.simulate('click');
+
+    let imageUrlInput = component.find(ImageUrlInput);
+    expect(imageUrlInput).toHaveProp('visible', true);
+
+    const meme = component.find(Meme);
+    meme.simulate('load');
+
+    imageUrlInput = component.find(ImageUrlInput);
+    expect(imageUrlInput).toHaveProp('visible', false);
+  });
+
+  const simulateInputChange = (component, value) => {
+    let button = component.find(Button).filter({ title: 'Image From URL' });
+    button.simulate('click');
+
+    let imageUrlInput = component.find(ImageUrlInput);
+    expect(imageUrlInput).toHaveProp('visible', true);
+
+    imageUrlInput.find(Input).simulate('change', { target: { value } });
+  };
+
+  const testImageUrl = 'https://test.url/this_is_test_image.png';
+  it('should set imageSrc on valid image url change', () => {
+    const component = mount(<App />);
+
+    simulateInputChange(component, testImageUrl);
+
+    const meme = component.find(Meme);
+    expect(meme).toHaveProp(
+      'imageSrc',
+      `https://meme.st6.io/meme-image?imageUrl=${testImageUrl}`,
+    );
+  });
+
+  it('should not set imageSrc on invalid image url change', () => {
+    const component = mount(<App />);
+
+    simulateInputChange(component, 'test');
+
+    const meme = component.find(Meme);
+    expect(meme).toHaveProp('imageSrc', 'meme.jpg');
+  });
+
+  it('should set hide input if image source already matches image url', () => {
+    const downloadImageUrl = `https://meme.st6.io/meme-image?imageUrl=${testImageUrl}`;
+    getRandomMeme.mockImplementation(() => downloadImageUrl);
+    const component = mount(<App />);
+
+    const meme = component.find(Meme);
+    expect(meme).toHaveProp('imageSrc', downloadImageUrl);
+
+    simulateInputChange(component, testImageUrl);
+
+    const imageUrlInput = component.find(ImageUrlInput);
+    expect(imageUrlInput).toHaveProp('visible', false);
   });
 });

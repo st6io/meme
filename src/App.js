@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useLayoutEffect, useRef, useCallback } from 'react';
 import { Heading, Card, Flex, Box, Button } from 'rebass';
 import styled, { ThemeProvider } from 'styled-components/macro';
 import { FaUpload, FaRandom, FaGithub, FaLink } from 'react-icons/fa';
 import { saveSvgAsPng } from 'save-svg-as-png';
 import { useMedia } from 'use-media';
-import isImageUrl from 'is-image-url';
+
+import isImageUrl from './utils/is-image-url';
 
 import {
   GlobalStyle,
@@ -56,7 +57,7 @@ const App = () => {
     setShowUrlInput(HIDDEN_IMG_URL_INPUT);
   }, [setImageUrl, setShowUrlInput]);
 
-  useEffect(
+  useLayoutEffect(
     () => {
       if (showUrlInput && isImageUrl(imageUrl)) {
         const downloadImageUrl = bypassCorsUrl(imageUrl);
@@ -176,11 +177,11 @@ const App = () => {
           </Flex>
 
           <ImageUrlInput
-            variant="primary"
-            placeholder="Image URL..."
             visible={showUrlInput}
             value={imageUrl}
-            onChange={onTextInputChange(setImageUrl)}
+            onChange={useCallback(onTextInputChange(setImageUrl), [
+              setImageUrl,
+            ])}
           />
 
           <MemeContainer justifyContent="center">
