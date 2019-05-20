@@ -1,57 +1,62 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components/macro';
 import { Flex } from 'rebass';
 
 import { Input } from './';
 
-const ImageUrlInput = ({ visible, transitionName, ...rest }) => {
+const TransitionTimeout = {
+  enter: 300,
+  exit: 400,
+};
+
+const ImageUrlInput = ({ visible, className, ...rest }) => {
   const TransitionContainer = useMemo(
     () =>
       styled(Flex)`
-        &.${transitionName}-enter {
+        &.${className}-enter {
           opacity: 0.01;
           max-height: 0;
         }
 
-        &.${transitionName}-enter.${transitionName}-enter-active {
+        &.${className}-enter-active {
           opacity: 1;
           transition: max-height 200ms ease-out, opacity 300ms ease-in 50ms;
           max-height: 100px;
         }
 
-        &.${transitionName}-leave {
+        &.${className}-exit {
           opacity: 1;
           max-height: 100px;
         }
 
-        &.${transitionName}-leave.${transitionName}-leave-active {
+        &.${className}-exit-active {
           opacity: 0.01;
           transition: max-height 400ms ease-out 100ms, opacity 300ms ease-in;
           max-height: 0;
         }
       `,
-    [transitionName],
+    [className],
   );
   TransitionContainer.displayName = 'TransitionContainer';
 
   return (
-    <ReactCSSTransitionGroup
-      transitionName={transitionName}
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={400}
+    <CSSTransition
+      in={visible}
+      classNames={className}
+      timeout={TransitionTimeout}
+      mountOnEnter
+      unmountOnExit
     >
-      {visible && (
-        <TransitionContainer
-          flexDirection="column"
-          px={3}
-          key="image-url-input-container"
-        >
-          <Input variant="primary" placeholder="Image URL..." {...rest} />
-        </TransitionContainer>
-      )}
-    </ReactCSSTransitionGroup>
+      <TransitionContainer
+        flexDirection="column"
+        px={3}
+        key="image-url-input-container"
+      >
+        <Input variant="primary" placeholder="Image URL..." {...rest} />
+      </TransitionContainer>
+    </CSSTransition>
   );
 };
 
@@ -59,12 +64,12 @@ ImageUrlInput.propTypes = {
   visible: PropTypes.bool,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  transitionName: PropTypes.string,
+  className: PropTypes.string,
 };
 
 ImageUrlInput.defaultProps = {
   visible: false,
-  transitionName: 'image-url',
+  className: 'image-url',
 };
 
 export default ImageUrlInput;

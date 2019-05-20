@@ -43,7 +43,7 @@ const bypassCorsUrl = url => `https://meme.st6.io/meme-image?imageUrl=${url}`;
 const App = () => {
   const isMobile = useMedia({ maxWidth: '40em' });
   const [theme, setTheme] = useState('light');
-  const [showUrlInput, setShowUrlInput] = useState(false);
+  const [urlInputVisible, setUrlInputVisible] = useState(false);
   const [topLabel, setTopLabel] = useState('Do the most meaningful meme...');
   const [bottomLabel, setBottomLabel] = useState('...of your life');
   const [imageUrl, setImageUrl] = useState(DEFAULT_IMG_URL);
@@ -52,12 +52,12 @@ const App = () => {
 
   const hideUrlInput = useCallback(() => {
     setImageUrl(DEFAULT_IMG_URL);
-    setShowUrlInput(false);
+    setUrlInputVisible(false);
   }, []);
 
   useLayoutEffect(
     () => {
-      if (showUrlInput && isImageUrl(imageUrl)) {
+      if (urlInputVisible && isImageUrl(imageUrl)) {
         const downloadImageUrl = bypassCorsUrl(imageUrl);
         if (imageSrc === downloadImageUrl) {
           hideUrlInput();
@@ -72,7 +72,7 @@ const App = () => {
     // applied as image source which would hide the input
     // even though the image might not be loaded, yet
     /* eslint-disable react-hooks/exhaustive-deps */ [
-      showUrlInput,
+      urlInputVisible,
       imageUrl,
       hideUrlInput,
     ],
@@ -149,7 +149,7 @@ const App = () => {
               variant="outline"
               title="Image From URL"
               ml={3}
-              onClick={() => setShowUrlInput(!showUrlInput)}
+              onClick={() => setUrlInputVisible(!urlInputVisible)}
             >
               <FaLink />
             </Button>
@@ -175,7 +175,7 @@ const App = () => {
           </Flex>
 
           <ImageUrlInput
-            visible={showUrlInput}
+            visible={urlInputVisible}
             value={imageUrl}
             onChange={useCallback(onTextInputChange(setImageUrl), [
               setImageUrl,

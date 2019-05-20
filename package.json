@@ -6,10 +6,10 @@
   "dependencies": {
     "is-image": "3.0.0",
     "react": "16.8.6",
-    "react-addons-css-transition-group": "15.6.2",
     "react-dom": "16.8.6",
     "react-icons": "3.5.0",
     "react-scripts": "3.0.0",
+    "react-transition-group": "4.0.1",
     "rebass": "3.0.1",
     "save-svg-as-png": "st6io/saveSvgAsPng#meme-fixes",
     "styled-components": "4.1.3",
