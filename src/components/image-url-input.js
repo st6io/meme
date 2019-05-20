@@ -6,7 +6,7 @@ import { Flex } from 'rebass';
 
 import { Input } from './';
 
-const ImageUrlInput = ({ visible, value, onChange, transitionName }) => {
+const ImageUrlInput = ({ visible, transitionName, ...rest }) => {
   const TransitionContainer = useMemo(
     () =>
       styled(Flex)`
@@ -48,12 +48,7 @@ const ImageUrlInput = ({ visible, value, onChange, transitionName }) => {
           px={3}
           key="image-url-input-container"
         >
-          <Input
-            variant="primary"
-            placeholder="Image URL..."
-            value={value}
-            onChange={onChange}
-          />
+          <Input variant="primary" placeholder="Image URL..." {...rest} />
         </TransitionContainer>
       )}
     </ReactCSSTransitionGroup>

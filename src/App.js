@@ -5,8 +5,6 @@ import { FaUpload, FaRandom, FaGithub, FaLink } from 'react-icons/fa';
 import { saveSvgAsPng } from 'save-svg-as-png';
 import { useMedia } from 'use-media';
 
-import isImageUrl from './utils/is-image-url';
-
 import {
   GlobalStyle,
   Meme,
@@ -18,6 +16,7 @@ import {
 } from './components';
 import { getRandomMeme } from './memes';
 import { websiteUrl, githubUrl } from './utils/links';
+import isImageUrl from './utils/is-image-url';
 
 const onTextInputChange = setter => ({ target: { value } }) => setter(value);
 
@@ -38,14 +37,13 @@ const MemeContainer = styled(Flex)`
 `;
 
 const DEFAULT_IMG_URL = '';
-const HIDDEN_IMG_URL_INPUT = false;
 
 const bypassCorsUrl = url => `https://meme.st6.io/meme-image?imageUrl=${url}`;
 
 const App = () => {
   const isMobile = useMedia({ maxWidth: '40em' });
   const [theme, setTheme] = useState('light');
-  const [showUrlInput, setShowUrlInput] = useState(HIDDEN_IMG_URL_INPUT);
+  const [showUrlInput, setShowUrlInput] = useState(false);
   const [topLabel, setTopLabel] = useState('Do the most meaningful meme...');
   const [bottomLabel, setBottomLabel] = useState('...of your life');
   const [imageUrl, setImageUrl] = useState(DEFAULT_IMG_URL);
@@ -54,8 +52,8 @@ const App = () => {
 
   const hideUrlInput = useCallback(() => {
     setImageUrl(DEFAULT_IMG_URL);
-    setShowUrlInput(HIDDEN_IMG_URL_INPUT);
-  }, [setImageUrl, setShowUrlInput]);
+    setShowUrlInput(false);
+  }, []);
 
   useLayoutEffect(
     () => {

@@ -152,6 +152,7 @@ describe('<App />', () => {
   };
 
   const testImageUrl = 'https://test.url/this_is_test_image.png';
+
   it('should set imageSrc on valid image url change', () => {
     const component = mount(<App />);
 

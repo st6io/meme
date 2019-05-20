@@ -9,7 +9,7 @@ describe('isImageUrl', () => {
     isImage.mockClear();
   });
 
-  it(`should return false when not allowed protocol`, () => {
+  it(`should return false when protocol is not allowed`, () => {
     isImage.mockImplementation(() => true);
     expect(isImageUrl('ftp://test:test')).toEqual(false);
   });
