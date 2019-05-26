@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageUrlInput /> should match snapshot when Input not visible 1`] = `
+<CSSTransition
+  classNames="image-url"
+  in={false}
+  mountOnEnter={true}
+  timeout={
+    Object {
+      "enter": 300,
+      "exit": 400,
+    }
+  }
+  unmountOnExit={true}
+>
+  <TransitionContainer
+    flexDirection="column"
+    key="image-url-input-container"
+    px={3}
+  >
+    <Styled(Styled(styled.div))
+      as="input"
+      border="1px solid"
+      borderRadius={3}
+      fontSize={1}
+      mb={3}
+      mx={0}
+      onChange={[MockFunction]}
+      placeholder="Image URL..."
+      px={3}
+      py={2}
+      variant="primary"
+    />
+  </TransitionContainer>
+</CSSTransition>
+`;
+
+exports[`<ImageUrlInput /> should match snapshot when Input should be visible 1`] = `
+<CSSTransition
+  classNames="image-url"
+  in={true}
+  mountOnEnter={true}
+  timeout={
+    Object {
+      "enter": 300,
+      "exit": 400,
+    }
+  }
+  unmountOnExit={true}
+>
+  <TransitionContainer
+    flexDirection="column"
+    key="image-url-input-container"
+    px={3}
+  >
+    <Styled(Styled(styled.div))
+      as="input"
+      border="1px solid"
+      borderRadius={3}
+      fontSize={1}
+      mb={3}
+      mx={0}
+      onChange={[MockFunction]}
+      placeholder="Image URL..."
+      px={3}
+      py={2}
+      value="http://test.url.com"
+      variant="primary"
+    />
+  </TransitionContainer>
+</CSSTransition>
+`;
